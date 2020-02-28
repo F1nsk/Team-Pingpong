@@ -20,13 +20,23 @@ Make Vector say 'Hello World' in this simple Vector SDK example program.
 """
 
 import anki_vector
+from anki_vector.util import degrees, distance_mm, speed_mmps
+from anki_vector.connection import ControlPriorityLevel
+
+
 
 
 def main():
-    args = anki_vector.util.parse_command_args()
-    with anki_vector.Robot(args.serial) as robot:
+  while(1):
+      args = anki_vector.util.parse_command_args()
+      with anki_vector.Robot(args.serial, behavior_control_level=ControlPriorityLevel.OVERRIDE_BEHAVIORS_PRIORITY) as robot:
         print("Say 'Hello World'...")
-        robot.behavior.say_text("Hello World")
+        robot.behavior.say_text("aaaaaaaahhh")
+
+        robot.behavior.drive_straight(distance_mm(20), speed_mmps(100))
+        robot.behavior.drive_straight(distance_mm(-30), speed_mmps(100))
+
+
 
 
 if __name__ == "__main__":
